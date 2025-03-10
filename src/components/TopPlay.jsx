@@ -1,5 +1,3 @@
-const TopPlay = () => (
-  <div>TopPlay</div>
-);
+const TopPlay = () => <div className="">TopPlay</div>;
 
 export default TopPlay;

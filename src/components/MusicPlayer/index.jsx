@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  nextSong,
-  prevSong,
-  playPause,
-} from "../../redux/features/playerSlice";
+import { nextSong, prevSong, playPause } from "../../redux/slice/playerSlice";
 import Controls from "./Controls";
 import Player from "./Player";
 import Seekbar from "./Seekbar";
