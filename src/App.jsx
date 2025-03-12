@@ -13,6 +13,7 @@ import {
 } from "./pages";
 
 const App = () => {
+  //@ts-ignore
   const { activeSong } = useSelector((state) => state.player);
 
   return (

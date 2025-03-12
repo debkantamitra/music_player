@@ -1,9 +1,17 @@
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
 import { useState } from "react";
+import { useGetTopChartsByGenreQuery } from "../redux/services/shazamCore";
 
 const Discover = () => {
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState(genres[0]?.value);
+  const { data, isLoading, error } = useGetTopChartsByGenreQuery({genre: selectedGenre});
+
+  if (isLoading) return <Loader title={"Loading songs..."} />;
+  if (error) return <Error />;
+
+
+  console.log(data);
 
   return (
     <div className="flex flex-col">
@@ -26,13 +34,11 @@ const Discover = () => {
       </div>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {selectedGenre ? (
-          Array.from({ length: 10 }, (_, i) => i + 1).map((song) => (
+        {selectedGenre ?(
+          data?.map((song) => (
             <SongCard key={song} song={song} />
           ))
-        ) : (
-          <Error />
-        )}
+        ) : null}
       </div>
     </div>
   );

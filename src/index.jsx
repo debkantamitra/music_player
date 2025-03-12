@@ -7,12 +7,15 @@ import './index.css';
 import App from './App';
 import { store } from './redux/store';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
         <App />
       </Router>
     </Provider>
-  </React.StrictMode>,
-);
+    </React.StrictMode>
+  );
+}
