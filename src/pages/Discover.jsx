@@ -5,11 +5,12 @@ import { useGetTopChartsByGenreQuery } from "../redux/services/shazamCore";
 
 const Discover = () => {
   const [selectedGenre, setSelectedGenre] = useState(genres[0]?.value);
-  const { data, isLoading, error } = useGetTopChartsByGenreQuery({genre: selectedGenre});
+  const { data, isLoading, error } = useGetTopChartsByGenreQuery({
+    genre: selectedGenre,
+  });
 
   if (isLoading) return <Loader title={"Loading songs..."} />;
   if (error) return <Error />;
-
 
   console.log(data);
 
@@ -34,11 +35,11 @@ const Discover = () => {
       </div>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {selectedGenre ?(
-          data?.map((song) => (
-            <SongCard key={song} song={song} />
-          ))
-        ) : null}
+        {selectedGenre
+          ? data?.map((song, index) => (
+              <SongCard key={song} song={song} i={index} />
+            ))
+          : null}
       </div>
     </div>
   );
