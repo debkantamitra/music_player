@@ -4,10 +4,17 @@ import { useDispatch } from "react-redux";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/slice/playerSlice";
 
-const SongCard = ({ song, i }) => {
+const SongCard = ({ song, i, isPlaying, activeSong, data }) => {
+  const dispatch = useDispatch();
   const songAttr = song?.attributes;
-  const activeSong = { id: 1 };
-  console.log(song.id === activeSong.id);
+
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+  const handlePlayClick = () => {
+    dispatch(playPause(true));
+    dispatch(setActiveSong({ song, data, index: i }));
+  };
 
   return (
     <div
@@ -23,7 +30,13 @@ const SongCard = ({ song, i }) => {
                : "hidden"
            }`}
         >
-          <PlayPause song={song} />
+          <PlayPause
+            song={song}
+            handlePlay={handlePlayClick}
+            handlePause={handlePauseClick}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+          />
         </div>
         <img src={songAttr?.artwork?.url} alt="song-img" />
       </div>
@@ -39,10 +52,10 @@ const SongCard = ({ song, i }) => {
 
         <Link to={`/artist/${songAttr?.artistId}`}>
           <p
-            className="text-sm font-semibold text-gray-300 truncate mt-1"
+            className="text-sm text-gray-300 truncate mt-1"
             title={`${songAttr?.albumName} - ${songAttr?.artistName}`}
           >
-            {songAttr?.albumName} - {songAttr?.artistName}
+            {songAttr?.artistName} - {songAttr?.albumName}
           </p>
         </Link>
       </div>
