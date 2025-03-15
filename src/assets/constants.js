@@ -17,7 +17,7 @@ export const genres = [
   { title: 'K-Pop', value: 'K_POP' },
 ];
 
-export const links = [
+export const navLinks = [
   { name: 'Discover', to: '/', icon: HiOutlineHome },
   { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
   { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
