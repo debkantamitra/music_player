@@ -86,7 +86,7 @@ const TopPlay = ({ selectedGenre }) => {
   return (
     <div
       ref={divRef}
-      className="xl:ml-6 xl:mb-0 mb-6 md:max-w-[500px] max-w-full flex flex-col overflow-y-auto"
+      className="xl:ml-6 xl:mb-0 mb-6 md:max-w-[500px] max-w-full flex flex-col overflow-y-auto xl:mt-4"
     >
       <div className="flex flex-col w-full">
         <div className="flex justify-between items-center">
