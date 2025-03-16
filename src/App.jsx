@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-
+import { genres } from "./assets/constants";
 import { Searchbar, Sidebar, MusicPlayer, TopPlay } from "./components";
 import {
   ArtistDetails,
@@ -11,9 +11,11 @@ import {
   SongDetails,
   TopCharts,
 } from "./pages";
+import { useState } from "react";
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
+  const [selectedGenre, setSelectedGenre] = useState(genres[0]?.value);
 
   return (
     <div className="relative flex">
@@ -21,11 +23,18 @@ const App = () => {
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286]">
         <Searchbar />
 
-        <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row">
-          {/* removed: flex-col-reverse from top and added: mt-6 to below */}
-          <div className="flex-1 h-fit pb-40 mt-6">
+        <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+          <div className="flex-1 h-fit pb-40">
             <Routes>
-              <Route path="/" element={<Discover />} />
+              <Route
+                path="/"
+                element={
+                  <Discover
+                    selectedGenre={selectedGenre}
+                    setSelectedGenre={setSelectedGenre}
+                  />
+                }
+              />
               <Route path="/top-artists" element={<TopArtists />} />
               <Route path="/top-charts" element={<TopCharts />} />
               <Route path="/around-you" element={<AroundYou />} />
@@ -34,9 +43,9 @@ const App = () => {
               <Route path="/search/:searchTerm" element={<Search />} />
             </Routes>
           </div>
-          {/* <div className="xl:sticky relative top-0 h-fit border">
-            <TopPlay />
-          </div> */}
+          <div className="xl:sticky relative top-0 h-fit">
+            <TopPlay selectedGenre={selectedGenre} />
+          </div>
         </div>
       </div>
 

@@ -4,9 +4,8 @@ import { useState } from "react";
 import { useGetTopChartsByGenreQuery } from "../redux/services/shazamCore";
 import { useSelector } from "react-redux";
 
-const Discover = () => {
+const Discover = ({ selectedGenre, setSelectedGenre }) => {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const [selectedGenre, setSelectedGenre] = useState(genres[0]?.value);
   const { data, isLoading, error } = useGetTopChartsByGenreQuery({
     genre: selectedGenre,
   });
@@ -18,7 +17,8 @@ const Discover = () => {
     <div className="flex flex-col">
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
         <h2 className="font-bold text-3xl text-white">
-          Discover {selectedGenre?.title}
+          Discover {selectedGenre?.[0]}
+          {selectedGenre?.slice(1).toLowerCase()}
         </h2>
 
         <select
