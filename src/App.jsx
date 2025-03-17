@@ -43,7 +43,7 @@ const App = () => {
               <Route path="/search/:searchTerm" element={<Search />} />
             </Routes>
           </div>
-          <div className="relative xl:absolute top-0 right-0 xl:h-[80vh] h-fit xl:overflow-y-scroll mt-8 pb-10 xl:w-[35%] xl:px-8">
+          <div className="relative xl:absolute top-0 right-0 xl:h-[80vh] h-fit xl:overflow-y-scroll mt-6 pb-14 xl:w-[35%] xl:px-8">
             <TopPlay selectedGenre={selectedGenre} />
           </div>
         </div>

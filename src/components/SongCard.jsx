@@ -41,7 +41,7 @@ const SongCard = ({ song, i, isPlaying, activeSong, data }) => {
         <img src={songAttr?.artwork?.url} alt="song-img" />
       </div>
       <div className="mt-4">
-        <Link to={`/song/${song.id}`}>
+        <Link to={`/songs/${song.id}`}>
           <p
             className="font-semibold text-gray-200 truncate"
             title={songAttr?.name}
