@@ -3,18 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { DetailsHeader, Error, Loader, RelatedSongs } from "../components";
 
-import { setActiveSong, playPause } from "../redux/slice/playerSlice";
-import { useGetSongDetailsByIdQuery } from "../redux/services/shazamCore";
+import {
+  useGetRelatedSongsByIdQuery,
+  useGetSongDetailsByIdQuery,
+} from "../redux/services/shazamCore";
 
 const SongDetails = () => {
   const { songid } = useParams();
-  const dispatch = useDispatch();
-  const { data, isLoading, error } = useGetSongDetailsByIdQuery({ id: songid });
-  const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const { data, isFetching: isFetchingsSongDetails } =
+    useGetSongDetailsByIdQuery({ id: songid });
+  //   const { data: relatedSongsData, isFetching: isFetchingRelatedSongs } =
+  //     useGetRelatedSongsByIdQuery({
+  //       id: songid,
+  //     });
   const lyrics = data?.resources?.lyrics;
   const lyricsText = lyrics
     ? lyrics[Object.keys(lyrics)?.[0]]?.attributes?.text
     : [];
+
+  if (isFetchingsSongDetails)
+    return <Loader title={"Loading song details.."} />;
 
   return (
     <div className="flex flex-col xl:w-[60%]">
@@ -41,6 +49,8 @@ const SongDetails = () => {
           )}
         </div>
       </div>
+
+      {/* <RelatedSongs data={relatedSongsData} /> */}
     </div>
   );
 };
